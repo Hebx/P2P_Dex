@@ -1,8 +1,7 @@
-
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const fs = require("fs");
 const mnemonic = fs.readFileSync(".secret").toString().trim();
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
   networks: {
@@ -13,12 +12,25 @@ module.exports = {
     },
     matic: {
       provider: () =>
-        new HDWalletProvider(mnemonic, `https://polygon-mumbai.g.alchemy.com/v2/${process.env.DATAHUB_POLYGON_API}`),
+        new HDWalletProvider(mnemonic, `https://polygon-rpc.com/`),
+      network_id: 137,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+      chainId: 137,
+      networkCheckTimeoutnetworkCheckTimeout: 10000,
+      timeoutBlocks: 200
+    },
+    mumbai: {
+      provider: () =>
+        new HDWalletProvider(mnemonic, `https://rpc-mumbai.matic.today`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
       skipDryRun: true,
       chainId: 80001,
+      networkCheckTimeoutnetworkCheckTimeout: 10000,
+      timeoutBlocks: 200
     },
   },
   contracts_directory: "./contracts",
